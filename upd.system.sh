@@ -33,11 +33,13 @@ rm -rf ~/.cache/paru/clone/*
 echo -e "${Y}REMOVE CACHES ${Y}:${R} ~/.cache/paru/clone/* ${E}"
 sleep 2
 
-sudo pacman -Sc --noconfirm
-sudo pacman -Syyu --noconfirm && paru -Syyu --noconfirm && yay -Syyu --noconfirm
+if [[ "--sc" == "${1}" ]]; then
+    sudo pacman -Sc --noconfirm
+fi
+sudo cachyos-rate-mirrors
+sudo pacman -Syyu --noconfirm && paru -Syyu --noconfirm
 
 history -a &>/dev/null
 rm -rf ~/.bash_history
 
 exit 0
-
